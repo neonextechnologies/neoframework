@@ -11,23 +11,23 @@ NeoFramework has a few system requirements. Make sure your server meets the foll
 - JSON PHP Extension
 - BCMath PHP Extension (for encryption)
 
-## Installing NeoFramework
+# Installing NeoFramework
 
-### Via Composer
+## Via Composer
 
 The recommended way to install NeoFramework is through Composer:
 
 ```bash
-composer create-project neoframework/framework myapp
+composer create-project neonex/neoframework myapp
 ```
 
 Or if you're starting with an existing project:
 
 ```bash
-composer require neoframework/framework
+composer require neonex/neoframework
 ```
 
-### Manual Installation
+## Manual Installation
 
 You can also manually clone the repository:
 
