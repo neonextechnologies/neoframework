@@ -4,7 +4,7 @@
   "author": "Neonex Technologies",
   "language": "en",
   "direction": "ltr",
-  "gitbook": "3.x.x",
+  "gitbook": "3.2.3",
   
   "structure": {
     "readme": "README.md",
@@ -17,20 +17,24 @@
     "lunr",
     "sharing",
     "fontsettings",
-    "theme-comscore",
     "-livereload",
     "prism",
     "-highlight",
     "github",
     "edit-link",
     "copy-code-button",
-    "expandable-chapters",
+    "expandable-chapters-small",
     "anchors",
     "page-toc-button",
     "back-to-top-button",
     "code",
     "splitter",
-    "versions-select"
+    "versions-select",
+    "insert-logo",
+    "favicon",
+    "github-buttons",
+    "advanced-emoji",
+    "alerts"
   ],
   
   "pluginsConfig": {
@@ -39,6 +43,14 @@
       "styles": {
         "website": "styles/website.css"
       }
+    },
+    "insert-logo": {
+      "url": "assets/logo.png",
+      "style": "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; text-align: center;"
+    },
+    "favicon": {
+      "shortcut": "assets/favicon.ico",
+      "bookmark": "assets/favicon.ico"
     },
     "fontsettings": {
       "theme": "white",
@@ -55,18 +67,31 @@
     "github": {
       "url": "https://github.com/neonextechnologies/neoframework"
     },
+    "github-buttons": {
+      "buttons": [
+        {
+          "user": "neonextechnologies",
+          "repo": "neoframework",
+          "type": "star",
+          "size": "small",
+          "count": true
+        }
+      ]
+    },
     "edit-link": {
       "base": "https://github.com/neonextechnologies/neoframework/tree/main/docs",
-      "label": "Edit This Page"
+      "label": "✏️ Edit This Page"
     },
     "prism": {
       "css": [
-        "prism-themes/themes/prism-ghcolors.css"
+        "prism-themes/themes/prism-material-dark.css"
       ],
       "lang": {
         "php": "php",
         "shell": "bash",
-        "json": "json"
+        "json": "json",
+        "javascript": "javascript",
+        "sql": "sql"
       }
     },
     "versions-select": {
