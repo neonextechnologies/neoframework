@@ -1,53 +1,114 @@
-# 📘 NeoFramework Development Summary
+# Summary
 
-## 🎯 Project Overview
+## GETTING STARTED
 
-**NeoFramework** is a modular monolith full-stack PHP framework inspired by Neonex Core Architecture principles. This framework provides enterprise-grade features while maintaining simplicity and developer experience.
+* [🚀 Introduction](introduction.md)
+* [📦 Installation](getting-started/installation.md)
+* [⚡ Quick Start](getting-started/quick-start.md)
+* [⚙️ Configuration](getting-started/configuration.md)
+* [📁 Directory Structure](getting-started/directory-structure.md)
 
----
+## CORE CONCEPTS
 
-## ✅ Completed Development Phases (95%)
+* [🏛️ Foundation Architecture](core-concepts/foundation-architecture.md)
+* [📜 Contracts & Interfaces](core-concepts/contracts.md)
+* [🔌 Service Providers](core-concepts/service-providers.md)
+* [🪝 Hook System](core-concepts/hooks.md)
+* [🧩 Plugins](core-concepts/plugins.md)
+* [📊 Metadata System](core-concepts/metadata.md)
 
-### Phase 1: Advanced ORM System ✅ (100%)
+## BASICS
 
-#### Features Implemented:
-1. **Eloquent-like ORM**
-   - Relationships: HasOne, HasMany, BelongsTo, BelongsToMany
-   - Pivot table support with timestamps
-   - Relationship constraints and eager loading
-   - Nested relationship loading
+* [🛣️ Routing](basics/routing.md)
+* [🎮 Controllers](basics/controllers.md)
+* [📨 Requests](basics/requests.md)
+* [📤 Responses](basics/responses.md)
+* [🎨 Views](basics/views.md)
+* [🔍 Validation](basics/validation.md)
+* [🛡️ Middleware](basics/middleware.md)
 
-2. **Query Builder Enhancements**
-   - Fluent query interface
-   - Advanced joins and subqueries
-   - Aggregate functions (count, sum, avg, max, min)
+## DATABASE
 
-3. **Model Features**
-   - Accessors & Mutators
-   - Attribute Casting (boolean, integer, float, date, array, json)
-   - Model Scopes (global and local)
-   - Model Events
-   - Soft Deletes
-   - Mass Assignment Protection
-   - Hidden Attributes
+* [🗄️ Getting Started](database/getting-started.md)
+* [🔨 Query Builder](database/query-builder.md)
+* [🗃️ Migrations](database/migrations.md)
+* [🌱 Seeders](database/seeders.md)
 
----
+## SECURITY
 
-### Phase 2: Advanced Authentication & Authorization ✅ (100%)
+* [🔐 Authentication](security/authentication.md)
+* [🛡️ Authorization](security/authorization.md)
 
-#### Features Implemented:
-1. **Password Reset** - Token-based with email notifications
-2. **Email Verification** - Verification tokens and middleware
-3. **Remember Me** - Persistent login tokens (30 days)
-4. **Multi-Auth Guards** - SessionGuard, TokenGuard, AuthManager
-5. **Authorization System** - Gates, Policies, AuthorizesRequests
+## ADVANCED FEATURES
 
----
+* [📧 Mail System](advanced/mail.md)
+* [💾 Caching](advanced/cache.md)
+* [📡 Events](advanced/events.md)
+* [📝 Logging](advanced/logging.md)
+* [📦 Storage](advanced/storage.md)
+* [🔔 Notifications](advanced/notifications.md)
+* [⏰ Task Scheduling](advanced/scheduling.md)
+* [❌ Error Handling](advanced/error-handling.md)
+* [🌐 Localization](advanced/localization.md)
 
-### Phase 3: Infrastructure Enhancements ✅ (100%)
+## TESTING
 
-#### Features Implemented:
-1. **Form Request Validation** - FormRequest, ValidationException
+* [🧪 Getting Started](testing/getting-started.md)
+
+## API
+
+* [📋 API Resources](api/resources.md)
+
+## CLI TOOLS
+
+* [⚡ Introduction to CLI](cli-tools/introduction.md)
+* [🗄️ Database Commands](cli-tools/database-commands.md)
+* [🔧 Custom Commands](cli-tools/custom-commands.md)
+* [🎯 Code Generators](cli-tools/generators/introduction.md)
+  * [🎮 Controller Generator](cli-tools/generators/controller.md)
+  * [📊 Model Generator](cli-tools/generators/model.md)
+  * [🔧 Middleware Generator](cli-tools/generators/middleware.md)
+  * [🗃️ Migration Generator](cli-tools/generators/migration.md)
+  * [🌱 Seeder Generator](cli-tools/generators/seeder.md)
+  * [✉️ Mail Generator](cli-tools/generators/mail.md)
+  * [📝 Form Generator](cli-tools/generators/form.md)
+  * [📦 CRUD Generator](cli-tools/generators/crud.md)
+
+## SERVICE PROVIDERS
+
+* [📦 Introduction](service-providers/introduction.md)
+* [🏗️ Container](service-providers/container.md)
+* [💉 Dependency Injection](service-providers/dependency-injection.md)
+* [🎭 Facades](service-providers/facades.md)
+
+## METADATA SYSTEM
+
+* [📊 Introduction](metadata/introduction.md)
+* [🏷️ Field Attributes](metadata/field-attributes.md)
+* [🗂️ Table Attributes](metadata/table-attributes.md)
+* [🔗 Relationships](metadata/relationships.md)
+* [📝 Form Generation](metadata/form-generation.md)
+* [✅ Validation](metadata/validation.md)
+
+## PLUGINS
+
+* [🧩 Introduction](plugins/introduction.md)
+* [🔧 Development](plugins/development.md)
+* [📚 Plugin API](plugins/plugin-api.md)
+* [📦 Distribution](plugins/distribution.md)
+
+## CONTRIBUTING
+
+* [📝 Guidelines](contributing/guidelines.md)
+* [💻 Code Style](contributing/code-style.md)
+* [🔄 Pull Requests](contributing/pull-requests.md)
+
+## RESOURCES
+
+* [📚 Learning Resources](resources/learning.md)
+* [📦 Packages](resources/packages.md)
+* [🛠️ Tools](resources/tools.md)
+* [👥 Community](resources/community.md)
 2. **API Resources** - JsonResource, ResourceCollection
 3. **Queue Enhancement** - Job classes, Chains, Batches
 4. **File Upload** - UploadedFile with store/hashName
