@@ -2,14 +2,12 @@
 
 <div align="center">
 
-![NeoFramework Logo](https://via.placeholder.com/200x200/667eea/ffffff?text=Neo)
+![PHP Version](https://img.shields.io/badge/PHP-8.0%20to%208.4-777BB4?style=flat-square&logo=php)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square)
+![Type](https://img.shields.io/badge/Type-Metadata%20Driven-orange?style=flat-square)
 
 **Modern PHP Framework for Web Artisans**
-
-[![PHP Version](https://img.shields.io/badge/PHP-8.0%2B-777BB4?style=flat-square&logo=php)](https://php.net)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square)](https://github.com/neonextechnologies/neoframework)
-[![Progress](https://img.shields.io/badge/Progress-95%25-success?style=flat-square)](DEVELOPMENT_ROADMAP.md)
 
 </div>
 
@@ -22,7 +20,7 @@
 ### Why NeoFramework?
 
 - 🚀 **Production Ready** - Battle-tested with 95% feature completeness
-- 🏗️ **Modular Architecture** - Clean separation of concerns with plugin system
+- 🏛️ **Modular Architecture** - Clean separation of concerns with plugin system
 - 🗄️ **Advanced ORM** - Eloquent-like with full relationship support
 - 🔐 **Complete Authentication** - Multi-guard auth with authorization
 - 🧪 **Testing First** - Built-in PHPUnit integration with factories
@@ -46,6 +44,250 @@ composer install
 
 # Configure environment
 cp .env.example .env
+php neo app:key
+
+# Run migrations
+php neo migrate
+
+# Start development server
+php neo serve
+```
+
+Visit `http://localhost:8000` and you're ready to go!
+
+---
+
+## Core Features
+
+### 🏛️ Foundation Architecture
+
+NeoFramework uses a **contract-first** architecture with clean separation:
+
+- **Foundation Layer** - Contract-first architecture with pure interfaces
+- **Plugin System** - Extensible with WordPress-style hooks
+- **Service Providers** - Deferred loading and dependency management
+- **Metadata-Driven** - PHP 8 Attributes for declarative development
+
+### 🗄️ Advanced ORM
+
+Eloquent-like ORM with full relationship support:
+
+```php
+// Relationships
+$user->posts()->with('comments', 'tags')->get();
+$post->user()->first();
+$user->roles()->attach($roleId);
+
+// Eager Loading
+$users = User::with(['posts.comments', 'roles'])->get();
+
+// Query Scopes
+User::active()->verified()->latest()->paginate(15);
+
+// Soft Deletes
+$user->delete();
+User::withTrashed()->get();
+```
+
+### 🔐 Complete Authentication
+
+Multi-guard authentication with authorization:
+
+```php
+// Authentication
+auth('web')->attempt($credentials, $remember = true);
+auth('api')->user();
+
+// Password Reset
+PasswordBroker::sendResetLink($email);
+
+// Email Verification
+$user->sendEmailVerificationNotification();
+
+// Authorization
+Gate::define('update-post', fn($user, $post) => 
+    $user->id === $post->user_id
+);
+
+$this->authorize('update', $post);
+```
+
+### 📧 Queue & Mail System
+
+Background job processing with multiple drivers:
+
+```php
+// Dispatch Jobs
+ProcessPodcast::dispatch($podcast);
+
+// Job Chains
+ProcessPodcast::withChain([
+    new OptimizePodcast,
+    new ReleasePodcast
+])->dispatch($podcast);
+
+// Send Mail
+Mail::to($user)->send(new WelcomeEmail($user));
+
+// Queueable Mail
+Mail::to($user)->queue(new InvoiceEmail($invoice));
+```
+
+### 🧪 Testing Suite
+
+Built-in PHPUnit integration with factories:
+
+```php
+public function test_user_can_create_post()
+{
+    $user = User::factory()->create();
+    
+    $this->actingAs($user)
+        ->post('/posts', [
+            'title' => 'Test Post',
+            'body' => 'Content'
+        ])
+        ->assertStatus(201)
+        ->assertJson(['success' => true]);
+}
+```
+
+### 🛠️ CLI Tools
+
+25+ powerful commands for code generation:
+
+```bash
+# Generate CRUD
+php neo make:crud Post --api --test
+
+# Generate Components
+php neo make:controller PostController --resource
+php neo make:model Post --migration --factory
+php neo make:middleware CheckAge
+php neo make:mail WelcomeEmail --markdown
+
+# Database Operations
+php neo migrate
+php neo db:seed
+php neo migrate:rollback
+```
+
+---
+
+## What's Inside?
+
+### Core Components
+
+- **Routing** - Fast routing with middleware support
+- **Controllers** - Resource controllers with dependency injection
+- **Views** - Blade-inspired templating engine
+- **Validation** - Comprehensive validation rules
+- **Middleware** - Request/response pipeline
+- **Events** - Event-driven architecture
+- **Cache** - Multi-driver caching (File, Redis, Memcached)
+- **Logging** - Monolog integration with multiple channels
+- **Storage** - File storage abstraction (Local, S3, FTP)
+- **Notifications** - Multi-channel notifications (Mail, SMS, Slack)
+- **Scheduling** - Cron-based task scheduling
+- **Localization** - Multi-language support with pluralization
+
+### Developer Tools
+
+- **Debug Toolbar** - Real-time performance monitoring
+- **Error Pages** - Beautiful error pages with stack traces
+- **Code Generators** - 25+ CLI commands
+- **Testing Suite** - PHPUnit integration with factories
+- **API Resources** - JSON transformation layer
+- **Form Generation** - Metadata-driven form builder
+
+---
+
+## Architecture
+
+### Foundation Framework
+
+NeoFramework is built as a **Foundation Framework** - not a full-stack framework like Laravel, but a solid architectural foundation for building one:
+
+```
+Traditional Full Framework (Laravel, Symfony):
+└── Everything built-in (Database, Auth, Queue, Cache, etc.)
+
+NeoFramework Foundation Framework:
+├── Foundation Layer - Contract-first architecture with pure interfaces
+├── Plugin System - Extensible with WordPress-style hooks  
+├── Service Provider System - Deferred loading and dependency management
+└── Metadata-Driven Development - PHP 8 Attributes for declarative development
+```
+
+### Metadata-Driven Development
+
+Use PHP 8 Attributes for declarative programming:
+
+```php
+#[Table(name: 'users')]
+#[SoftDeletes]
+class User extends Model
+{
+    #[Column(type: 'string', length: 100)]
+    #[Validation('required|email|unique:users')]
+    public string $email;
+    
+    #[Column(type: 'string')]
+    #[Hidden]
+    public string $password;
+    
+    #[HasMany(Post::class)]
+    public function posts() {}
+}
+```
+
+---
+
+## Documentation
+
+Explore comprehensive documentation:
+
+- [Installation Guide](getting-started/installation.md)
+- [Quick Start Tutorial](getting-started/quick-start.md)
+- [Foundation Architecture](core-concepts/foundation-architecture.md)
+- [Database & ORM](database/getting-started.md)
+- [Authentication](security/authentication.md)
+- [Testing Guide](testing/getting-started.md)
+- [CLI Tools](cli-tools/introduction.md)
+
+---
+
+## Requirements
+
+- PHP 8.0+ with extensions:
+  - PDO (MySQL/PostgreSQL)
+  - mbstring
+  - OpenSSL
+  - JSON
+- Composer 2.0+
+- MySQL 5.7+ / PostgreSQL 10+ / SQLite 3.8+
+
+---
+
+## License
+
+NeoFramework is open-source software licensed under the [MIT license](LICENSE).
+
+---
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](contributing/guidelines.md) for details.
+
+---
+
+<div align="center">
+
+**Built with ❤️ by Neonex Technologies**
+
+[GitHub](https://github.com/neonextechnologies/neoframework) • [Documentation](https://docs.neoframework.io) • [Community](resources/community.md)
+
+</div>
 
 # Run migrations
 php neo migrate
