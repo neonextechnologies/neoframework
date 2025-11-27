@@ -2,20 +2,70 @@
 
 namespace NeoPhp\Database;
 
+use NeoPhp\Database\Concerns\HasRelationships;
+use NeoPhp\Database\Concerns\QueriesRelationships;
+use NeoPhp\Database\Concerns\HasEvents;
+use NeoPhp\Database\Concerns\HasGlobalScopes;
+
 abstract class Model
 {
+    use HasRelationships;
+    use QueriesRelationships;
+    use HasEvents;
+    use HasGlobalScopes;
+
     protected static $table;
     protected static $primaryKey = 'id';
     protected static $timestamps = true;
     protected static $connection;
+    protected static $booted = [];
 
     protected $attributes = [];
     protected $original = [];
     protected $exists = false;
+    protected $relations = [];
 
     public function __construct(array $attributes = [])
     {
+        $this->bootIfNotBooted();
         $this->fill($attributes);
+    }
+
+    /**
+     * Boot the model if not already booted
+     */
+    protected function bootIfNotBooted(): void
+    {
+        $class = static::class;
+
+        if (!isset(static::$booted[$class])) {
+            static::$booted[$class] = true;
+            static::boot();
+        }
+    }
+
+    /**
+     * Boot the model and traits
+     */
+    protected static function boot(): void
+    {
+        static::bootTraits();
+    }
+
+    /**
+     * Boot all of the bootable traits on the model
+     */
+    protected static function bootTraits(): void
+    {
+        $class = static::class;
+
+        foreach (class_uses_recursive($class) as $trait) {
+            $method = 'boot' . class_basename($trait);
+
+            if (method_exists($class, $method)) {
+                forward_static_call([$class, $method]);
+            }
+        }
     }
 
     public static function setConnection(Database $db): void
@@ -34,11 +84,7 @@ abstract class Model
 
     public static function all(): array
     {
-        $results = static::getConnection()->all(static::$table);
-        
-        return array_map(function ($item) {
-            return new static($item);
-        }, $results);
+        return static::query()->get();
     }
 
     public static function find($id): ?self
@@ -53,6 +99,9 @@ abstract class Model
         $model->exists = true;
         $model->original = $result;
         
+        // Fire retrieved event
+        $model->fireModelEvent('retrieved', false);
+        
         return $model;
     }
 
@@ -63,8 +112,24 @@ abstract class Model
             $operator = '=';
         }
 
+        $instance = new static();
         $builder = new QueryBuilder(static::getConnection(), static::$table, static::class);
+        
+        // Apply global scopes
+        $instance->applyGlobalScopes($builder);
+        
         return $builder->where($column, $operator, $value);
+    }
+
+    public static function query(): QueryBuilder
+    {
+        $instance = new static();
+        $builder = new QueryBuilder(static::getConnection(), static::$table, static::class);
+        
+        // Apply global scopes
+        $instance->applyGlobalScopes($builder);
+        
+        return $builder;
     }
 
     public static function create(array $attributes): self
@@ -77,6 +142,11 @@ abstract class Model
 
     public function save(): bool
     {
+        // Fire saving event
+        if ($this->fireModelEvent('saving') === false) {
+            return false;
+        }
+
         if (static::$timestamps) {
             $now = date('Y-m-d H:i:s');
             
@@ -96,17 +166,31 @@ abstract class Model
 
     protected function performInsert(): bool
     {
+        // Fire creating event
+        if ($this->fireModelEvent('creating') === false) {
+            return false;
+        }
+
         $id = static::getConnection()->insert(static::$table, $this->attributes);
         
         $this->setAttribute(static::$primaryKey, $id);
         $this->exists = true;
         $this->original = $this->attributes;
+
+        // Fire created and saved events
+        $this->fireModelEvent('created', false);
+        $this->fireModelEvent('saved', false);
         
         return true;
     }
 
     protected function performUpdate(): bool
     {
+        // Fire updating event
+        if ($this->fireModelEvent('updating') === false) {
+            return false;
+        }
+
         $id = $this->attributes[static::$primaryKey];
         $where = static::$primaryKey . ' = ?';
         
@@ -118,6 +202,10 @@ abstract class Model
         );
 
         $this->original = $this->attributes;
+
+        // Fire updated and saved events
+        $this->fireModelEvent('updated', false);
+        $this->fireModelEvent('saved', false);
         
         return $updated > 0;
     }
@@ -128,12 +216,20 @@ abstract class Model
             return false;
         }
 
+        // Fire deleting event
+        if ($this->fireModelEvent('deleting') === false) {
+            return false;
+        }
+
         $id = $this->attributes[static::$primaryKey];
         $where = static::$primaryKey . ' = ?';
         
         $deleted = static::getConnection()->delete(static::$table, $where, [$id]);
         
         $this->exists = false;
+
+        // Fire deleted event
+        $this->fireModelEvent('deleted', false);
         
         return $deleted > 0;
     }

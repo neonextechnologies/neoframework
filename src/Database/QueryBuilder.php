@@ -54,6 +54,10 @@ class QueryBuilder
         return array_map(function ($item) {
             $model = new $this->modelClass($item);
             $model->exists = true;
+            
+            // Fire retrieved event
+            $model->fireModelEvent('retrieved', false);
+            
             return $model;
         }, $results);
     }
@@ -64,6 +68,20 @@ class QueryBuilder
         $results = $this->get();
         
         return $results[0] ?? null;
+    }
+
+    /**
+     * Magic method to handle dynamic scopes
+     */
+    public function __call($method, $parameters)
+    {
+        // Check if it's a scope method
+        if (method_exists($this->modelClass, 'scope' . ucfirst($method))) {
+            $instance = new $this->modelClass();
+            return $instance->callScope($this, $method, $parameters);
+        }
+
+        throw new \BadMethodCallException("Method {$method} does not exist.");
     }
 
     public function count(): int
