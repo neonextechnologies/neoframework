@@ -1,11 +1,15 @@
 {
-    "name": "neonex/neophp",
-    "description": "NeoPhp - A Modern PHP Core Framework inspired by Neonex",
-    "type": "library",
+    "name": "neonex/neoframework",
+    "description": "NeoFramework - Modern PHP Full-Stack Framework with Metadata-Driven Development",
+    "type": "project",
     "license": "MIT",
+    "keywords": ["framework", "laravel", "php", "cms", "metadata", "neo"],
+    "homepage": "https://github.com/neonextechnologies/neoframework",
     "authors": [
         {
-            "name": "Neonex Team"
+            "name": "Neonex Technologies",
+            "email": "support@neonex.dev",
+            "homepage": "https://neonex.dev"
         }
     ],
     "require": {
@@ -68,6 +72,40 @@
             "Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php neo app:key",
+            "@php -r \"echo '\\n\\033[32mNeoFramework installed successfully!\\033[0m\\n';\"",
+            "@php -r \"echo '\\033[33mNext steps:\\033[0m\\n';\"",
+            "@php -r \"echo '  1. Configure .env file\\n';\"",
+            "@php -r \"echo '  2. Run: php neo migrate\\n';\"",
+            "@php -r \"echo '  3. Run: php neo serve\\n\\n';\""
+        ],
+        "post-autoload-dump": [
+            "@php neo package:discover --ansi || true"
+        ],
+        "test": [
+            "vendor/bin/phpunit"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "2.x-dev"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "*": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "minimum-stability": "dev",
     "prefer-stable": true
 }
