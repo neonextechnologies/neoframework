@@ -446,7 +446,7 @@ auth('api')->user()      // API guard
 git commit -am "Backup before upgrade"
 
 # 2. Update composer.json
-composer require neoframework/framework:^2.0
+composer require neonex/neoframework:^2.0
 
 # 3. Update configuration
 php neo config:cache --clear
