@@ -1,14 +1,13 @@
-# Summary
+# Table of contents
 
 * [🚀 Introduction](introduction.md)
-
-### GETTING STARTED
 * [📦 Installation](getting-started/installation.md)
 * [⚡ Quick Start](getting-started/quick-start.md)
 * [⚙️ Configuration](getting-started/configuration.md)
 * [📁 Directory Structure](getting-started/directory-structure.md)
 
-### CORE CONCEPTS
+## Core Concepts
+
 * [🏛️ Foundation Architecture](core-concepts/foundation-architecture.md)
 * [📜 Contracts & Interfaces](core-concepts/contracts.md)
 * [🔌 Service Providers](core-concepts/service-providers.md)
@@ -16,7 +15,8 @@
 * [🧩 Plugins](core-concepts/plugins.md)
 * [📊 Metadata System](core-concepts/metadata.md)
 
-### BASICS
+## Basics
+
 * [🛣️ Routing](basics/routing.md)
 * [🎮 Controllers](basics/controllers.md)
 * [📨 Requests](basics/requests.md)
@@ -25,17 +25,20 @@
 * [🔍 Validation](basics/validation.md)
 * [🛡️ Middleware](basics/middleware.md)
 
-### DATABASE
+## Database
+
 * [🗄️ Getting Started](database/getting-started.md)
 * [🔨 Query Builder](database/query-builder.md)
 * [🗃️ Migrations](database/migrations.md)
 * [🌱 Seeders](database/seeders.md)
 
-### SECURITY
+## Security
+
 * [🔐 Authentication](security/authentication.md)
 * [🛡️ Authorization](security/authorization.md)
 
-### ADVANCED FEATURES
+## Advanced Features
+
 * [📧 Mail System](advanced/mail.md)
 * [💾 Caching](advanced/cache.md)
 * [📡 Events](advanced/events.md)
@@ -46,13 +49,16 @@
 * [❌ Error Handling](advanced/error-handling.md)
 * [🌐 Localization](advanced/localization.md)
 
-### TESTING
+## Testing
+
 * [🧪 Getting Started](testing/getting-started.md)
 
-### API
+## API
+
 * [📋 API Resources](api/resources.md)
 
-### CLI TOOLS
+## CLI Tools
+
 * [⚡ Introduction to CLI](cli-tools/introduction.md)
 * [🗄️ Database Commands](cli-tools/database-commands.md)
 * [🔧 Custom Commands](cli-tools/custom-commands.md)
@@ -65,13 +71,15 @@
 * [📝 Form Generator](cli-tools/generators/form.md)
 * [📦 CRUD Generator](cli-tools/generators/crud.md)
 
-### SERVICE PROVIDERS
+## Service Providers
+
 * [📦 Introduction](service-providers/introduction.md)
 * [🏗️ Container](service-providers/container.md)
 * [💉 Dependency Injection](service-providers/dependency-injection.md)
 * [🎭 Facades](service-providers/facades.md)
 
-### METADATA SYSTEM
+## Metadata System
+
 * [📊 Introduction](metadata/introduction.md)
 * [🏷️ Field Attributes](metadata/field-attributes.md)
 * [🗂️ Table Attributes](metadata/table-attributes.md)
@@ -79,18 +87,21 @@
 * [📝 Form Generation](metadata/form-generation.md)
 * [✅ Validation](metadata/validation.md)
 
-### PLUGINS
+## Plugins
+
 * [🧩 Introduction](plugins/introduction.md)
 * [🔧 Development](plugins/development.md)
 * [📚 Plugin API](plugins/plugin-api.md)
 * [📦 Distribution](plugins/distribution.md)
 
-### CONTRIBUTING
+## Contributing
+
 * [📝 Guidelines](contributing/guidelines.md)
 * [💻 Code Style](contributing/code-style.md)
 * [🔄 Pull Requests](contributing/pull-requests.md)
 
-### RESOURCES
+## Resources
+
 * [📚 Learning Resources](resources/learning.md)
 * [📦 Packages](resources/packages.md)
 * [🛠️ Tools](resources/tools.md)
