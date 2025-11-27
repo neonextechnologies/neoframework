@@ -341,3 +341,42 @@ if (!function_exists('cannot')) {
         return !can($ability, $arguments);
     }
 }
+
+if (!function_exists('__')) {
+    function __(string $key, array $replace = [], ?string $locale = null): string
+    {
+        $translator = app(\NeoPhp\Translation\Translator::class);
+        return $translator->get($key, $replace, $locale);
+    }
+}
+
+if (!function_exists('trans')) {
+    function trans(string $key, array $replace = [], ?string $locale = null): string
+    {
+        return __($key, $replace, $locale);
+    }
+}
+
+if (!function_exists('trans_choice')) {
+    function trans_choice(string $key, int $number, array $replace = [], ?string $locale = null): string
+    {
+        $translator = app(\NeoPhp\Translation\Translator::class);
+        return $translator->choice($key, $number, $replace, $locale);
+    }
+}
+
+if (!function_exists('app_locale')) {
+    function app_locale(): string
+    {
+        $translator = app(\NeoPhp\Translation\Translator::class);
+        return $translator->getLocale();
+    }
+}
+
+if (!function_exists('set_locale')) {
+    function set_locale(string $locale): void
+    {
+        $translator = app(\NeoPhp\Translation\Translator::class);
+        $translator->setLocale($locale);
+    }
+}

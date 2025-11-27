@@ -110,9 +110,33 @@ class Request
         return $this->cookies[$key] ?? $default;
     }
 
-    public function file(string $key)
+    public function file(string $key): ?UploadedFile
     {
-        return $this->files[$key] ?? null;
+        $file = $this->files[$key] ?? null;
+
+        if (!$file || !isset($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) {
+            return null;
+        }
+
+        return new UploadedFile($file);
+    }
+
+    public function hasFile(string $key): bool
+    {
+        return $this->file($key) !== null;
+    }
+
+    public function allFiles(): array
+    {
+        $files = [];
+
+        foreach ($this->files as $key => $file) {
+            if (isset($file['tmp_name'])) {
+                $files[$key] = new UploadedFile($file);
+            }
+        }
+
+        return $files;
     }
 
     public function isMethod(string $method): bool

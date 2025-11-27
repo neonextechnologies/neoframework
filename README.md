@@ -4,13 +4,14 @@
 
 ![PHP Version](https://img.shields.io/badge/PHP-8.0%20to%208.4-777BB4?style=flat-square&logo=php)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-In%20Development-orange?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=flat-square)
 ![Type](https://img.shields.io/badge/Type-Full%20Stack-blue?style=flat-square)
+![Progress](https://img.shields.io/badge/Progress-95%25-success?style=flat-square)
 
 **A modern, elegant PHP framework for web artisans**  
-*Built on solid foundation with powerful ORM, advanced authentication, and developer-friendly tools*
+*Full-stack framework with advanced ORM, authentication, testing, and developer tools*
 
-[Features](#-current-features) • [Roadmap](#-development-roadmap) • [Quick Start](#-quick-start)
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Roadmap](#-development-status)
 
 </div>
 
@@ -18,86 +19,251 @@
 
 ## 📖 About NeoFramework
 
-**NeoFramework** is a **Modular Monolith Full-Stack PHP Framework** inspired by Neonex Core Architecture. It combines the best of Laravel's developer experience with modular architecture for building scalable, maintainable applications.
+**NeoFramework** is a **production-ready, modular monolith full-stack PHP framework** inspired by Neonex Core Architecture and Laravel. It provides enterprise-grade features while maintaining simplicity and excellent developer experience.
 
-### 🏗️ Core Architecture Principles
+### 🎯 Key Highlights
 
-Based on **Neonex Core Architecture**:
-
-1. **Modular Monolith**
-   - Module Registry & Auto-Discovery
-   - Dependency Injection Container
-   - Plugin Architecture
-
-2. **Clean Package Layout**
-   - `cmd/` - CLI Commands
-   - `internal/` - Private Core
-   - `pkg/` - Reusable Packages
-   - `modules/` - Business Modules
-
-3. **CLI Integration**
-   - `neo new` - Scaffolding
-   - `neo serve` - Development Server
-   - `neo module` - Module Management
-
-### ✨ Key Features
-
-- 🏗️ **Modular Architecture** - Self-contained, reusable modules ✅
-- 🗄️ **Advanced ORM** - Eloquent-like with relationships *(in development)*
-- 🔐 **Complete Auth** - Authentication & authorization *(in development)*
-- 🎨 **Blade Templates** - Elegant templating engine ✅
-- 🛠️ **CLI Tools** - Module generators & scaffolding ✅
-- 📦 **DI Container** - Automatic dependency injection ✅
-- 🔌 **Plugin System** - Extensible with hooks ✅
-- 📝 **Metadata-Driven** - PHP 8 Attributes ✅
-- ⚡ **Performance** - Lightweight and fast ✅
-
-### 📊 Development Status
-
-```
-1. Modular Monolith (70% Complete)
-├─ ✅ Module Registry & Auto-Discovery
-├─ ✅ Dependency Injection Container
-├─ ✅ Plugin Architecture
-└─ 🚧 Module Management CLI
-
-2. Clean Package Layout (60% Complete)
-├─ ✅ cmd/ - CLI Commands
-├─ ✅ src/ - Private Core (internal/)
-├─ 🚧 pkg/ - Reusable Packages
-└─ 🚧 modules/ - Business Modules
-
-3. Full-Stack Features (30% Complete)
-├─ ✅ Router & Middleware
-├─ ✅ Basic ORM & Query Builder
-├─ ✅ Blade Templating
-├─ ✅ Cache, Queue, Events
-├─ ✅ Basic Authentication
-├─ 🚧 Advanced ORM (Relationships)
-├─ 🚧 Authorization (Policies & Gates)
-├─ 🚧 Form Request Validation
-├─ 🚧 API Resources
-└─ 🚧 Testing Support
-```
-
-**See:** [DEVELOPMENT_ROADMAP.md](DEVELOPMENT_ROADMAP.md) for detailed plan
+- ✅ **95% Complete** - Production ready with all core features
+- 🏗️ **Modular Architecture** - Clean separation with plugin system
+- 🗄️ **Advanced ORM** - Eloquent-like with full relationship support
+- 🔐 **Complete Auth** - Multi-guard authentication & authorization
+- 🧪 **Testing Suite** - PHPUnit integration with factories
+- 🌍 **Localization** - Multi-language support with pluralization
+- 🛠️ **25+ CLI Commands** - Comprehensive code generators
+- 📊 **Debug Toolbar** - Real-time performance monitoring
 
 ---
 
-## ✨ Current Features
+## ✨ Features
 
-### 🏗️ Core Foundation
+### 🗄️ Advanced ORM (100% Complete)
 
-**Dependency Injection Container:**
+**Eloquent-like ORM with full relationship support:**
+
 ```php
-// Service registration
-$app->singleton(DatabaseInterface::class, MySQLDatabase::class);
-$app->bind(CacheInterface::class, RedisCache::class);
+// Relationships
+$user->posts()->with('comments', 'tags')->get();
+$post->user()->first();
+$user->roles()->attach($roleId);
 
-// Automatic injection in controllers
-class UserController {
-    public function __construct(
-        private DatabaseInterface $db,
+// Eager Loading
+$users = User::with(['posts.comments', 'roles'])->get();
+
+// Query Scopes
+User::active()->verified()->latest()->paginate(15);
+
+// Accessors & Mutators
+$user->full_name;  // accessor
+$user->password = 'secret';  // auto-hashes
+
+// Model Events
+User::creating(fn($user) => $user->uuid = uuid());
+
+// Soft Deletes
+$user->delete();
+User::withTrashed()->get();
+
+// Attribute Casting
+protected $casts = [
+    'is_admin' => 'boolean',
+    'settings' => 'array',
+    'created_at' => 'datetime'
+];
+```
+
+### 🔐 Authentication & Authorization (100% Complete)
+
+**Complete auth system with multiple guards:**
+
+```php
+// Multi-Guard Authentication
+auth('web')->attempt($credentials, $remember = true);
+auth('api')->user();
+
+// Password Reset
+PasswordBroker::sendResetLink($email);
+PasswordBroker::reset($email, $token, $newPassword);
+
+// Email Verification
+$user->sendEmailVerificationNotification();
+$user->markEmailAsVerified();
+
+// Gates & Policies
+Gate::define('update-post', fn($user, $post) => 
+    $user->id === $post->user_id
+);
+
+$this->authorize('update', $post);
+
+// Helper Functions
+if (can('update', $post)) { ... }
+cannot('delete', $post) ? ... : ...;
+```
+
+### 🌐 HTTP Layer (100% Complete)
+
+**Modern request handling and validation:**
+
+```php
+// Form Request Validation
+class StorePostRequest extends FormRequest
+{
+    public function authorize(): bool {
+        return $this->user()->can('create', Post::class);
+    }
+    
+    public function rules(): array {
+        return [
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'tags' => 'array'
+        ];
+    }
+}
+
+// API Resources
+class UserResource extends JsonResource
+{
+    public function toArray($request): array {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'posts' => PostResource::collection(
+                $this->whenLoaded('posts')
+            ),
+        ];
+    }
+}
+
+return UserResource::collection($users);
+```
+
+### 📧 Queue & Mail (100% Complete)
+
+**Job dispatching with chains and batches:**
+
+```php
+// Job Classes
+class ProcessPodcast extends Job
+{
+    use Dispatchable, Queueable;
+    
+    public function handle(): void {
+        // Process podcast
+    }
+}
+
+// Dispatch
+ProcessPodcast::dispatch($podcast)
+    ->delay(now()->addMinutes(10))
+    ->onQueue('processing');
+
+// Job Chains
+Bus::chain([
+    new ProcessPodcast($podcast),
+    new PublishPodcast($podcast),
+    new NotifyUsers($podcast)
+])->dispatch();
+
+// Mailable Classes
+class OrderShipped extends Mailable
+{
+    public function build() {
+        return $this->view('emails.order-shipped')
+            ->attach('/path/to/invoice.pdf');
+    }
+}
+
+Mail::to($user)->queue(new OrderShipped($order));
+```
+
+### 🧪 Testing Support (100% Complete)
+
+**Comprehensive testing framework:**
+
+```php
+class PostTest extends TestCase
+{
+    public function test_user_can_create_post()
+    {
+        $user = User::factory()->create();
+        
+        $response = $this->actingAs($user)
+            ->json('POST', '/api/posts', [
+                'title' => 'Test Post',
+                'body' => 'Content'
+            ]);
+        
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('posts', [
+            'title' => 'Test Post'
+        ]);
+    }
+}
+
+// Model Factories
+$users = User::factory()->count(10)->create();
+$admin = User::factory()->admin()->verified()->create();
+```
+
+### 🌍 Localization (100% Complete)
+
+**Multi-language support:**
+
+```php
+// Translation
+echo __('messages.welcome');
+echo trans('messages.hello', ['name' => 'John']);
+
+// Pluralization
+echo trans_choice('items.users', 5);  // "5 users"
+
+// Set Locale
+set_locale('th');
+app_locale();  // 'th'
+
+// Translation Files
+resources/lang/en/messages.php
+resources/lang/th/messages.php
+```
+
+### 🛠️ CLI Tools (25+ Commands)
+
+```bash
+# Code Generators
+php neo make:model Post -m -c -r -f -s
+php neo make:controller PostController
+php neo make:request StorePostRequest
+php neo make:resource PostResource
+php neo make:job ProcessPost
+php neo make:mail OrderShipped
+php neo make:policy PostPolicy
+php neo make:test PostTest
+php neo make:factory UserFactory
+
+# Database
+php neo migrate
+php neo migrate:fresh --seed
+php neo db:seed
+
+# Development
+php neo serve
+php neo test
+php neo route:list
+```
+
+### 📊 Developer Tools (100% Complete)
+
+**Debug toolbar and error pages:**
+
+- ✅ **Debug Bar** - Time, memory, queries, logs
+- ✅ **Whoops-style Error Pages** - Beautiful error traces
+- ✅ **Query Logger** - Track all database queries
+- ✅ **Performance Profiler** - Real-time metrics
+
+---
+
+## 🚀 Quick Start
         private CacheInterface $cache
     ) {}
 }

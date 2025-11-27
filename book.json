@@ -1,0 +1,113 @@
+{
+  "title": "NeoFramework Documentation",
+  "description": "Complete documentation for NeoFramework - Modern PHP Full-Stack Framework",
+  "author": "Neonex Technologies",
+  "language": "en",
+  "direction": "ltr",
+  "gitbook": "3.x.x",
+  
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  
+  "plugins": [
+    "theme-default",
+    "search",
+    "lunr",
+    "sharing",
+    "fontsettings",
+    "theme-comscore",
+    "-livereload",
+    "prism",
+    "-highlight",
+    "github",
+    "edit-link",
+    "copy-code-button",
+    "expandable-chapters",
+    "anchors",
+    "page-toc-button",
+    "back-to-top-button",
+    "code",
+    "splitter",
+    "versions-select"
+  ],
+  
+  "pluginsConfig": {
+    "theme-default": {
+      "showLevel": true,
+      "styles": {
+        "website": "styles/website.css"
+      }
+    },
+    "fontsettings": {
+      "theme": "white",
+      "family": "sans",
+      "size": 2
+    },
+    "sharing": {
+      "facebook": true,
+      "twitter": true,
+      "google": false,
+      "weibo": false,
+      "all": ["facebook", "twitter", "linkedin", "reddit"]
+    },
+    "github": {
+      "url": "https://github.com/neonextechnologies/neoframework"
+    },
+    "edit-link": {
+      "base": "https://github.com/neonextechnologies/neoframework/tree/main/docs",
+      "label": "Edit This Page"
+    },
+    "prism": {
+      "css": [
+        "prism-themes/themes/prism-ghcolors.css"
+      ],
+      "lang": {
+        "php": "php",
+        "shell": "bash",
+        "json": "json"
+      }
+    },
+    "versions-select": {
+      "versions": [
+        {
+          "name": "2.0",
+          "description": "Latest (2.0)",
+          "url": "https://docs.neoframework.io/"
+        },
+        {
+          "name": "1.0",
+          "description": "Version 1.0",
+          "url": "https://docs.neoframework.io/v1/"
+        }
+      ]
+    },
+    "page-toc-button": {
+      "maxTocDepth": 2,
+      "minTocSize": 2
+    }
+  },
+  
+  "variables": {
+    "version": "2.0.0",
+    "php_version": "8.0+",
+    "framework_name": "NeoFramework"
+  },
+  
+  "links": {
+    "sidebar": {
+      "GitHub": "https://github.com/neonextechnologies/neoframework",
+      "Website": "https://neoframework.io",
+      "Support": "https://github.com/neonextechnologies/neoframework/issues"
+    }
+  },
+  
+  "styles": {
+    "website": "styles/website.css",
+    "ebook": "styles/ebook.css",
+    "pdf": "styles/pdf.css",
+    "mobi": "styles/mobi.css",
+    "epub": "styles/epub.css"
+  }
+}

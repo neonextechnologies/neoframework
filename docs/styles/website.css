@@ -1,0 +1,324 @@
+/* Custom styles for NeoFramework Documentation */
+
+:root {
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --dark-color: #1a1a1a;
+    --light-color: #f3f4f6;
+}
+
+/* Logo and branding */
+.book-summary .book-brand {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.book-summary .book-brand img {
+    max-width: 120px;
+    height: auto;
+}
+
+.book-summary .book-brand h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+/* Sidebar styling */
+.book-summary {
+    background: #fafafa;
+}
+
+.book-summary ul.summary > li > a,
+.book-summary ul.summary > li > span {
+    padding: 10px 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.book-summary ul.summary > li.active > a {
+    background: var(--primary-color);
+    color: white;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.book-summary ul.summary li a:hover {
+    background: #f0f0f0;
+}
+
+/* Content area */
+.book-body {
+    background: white;
+}
+
+.markdown-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* Headings */
+.markdown-section h1 {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.markdown-section h2 {
+    color: #333;
+    font-size: 2em;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.markdown-section h3 {
+    color: #444;
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Code blocks */
+.markdown-section pre {
+    background: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-x: auto;
+}
+
+.markdown-section code {
+    background: #f5f5f5;
+    color: #e83e8c;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.markdown-section pre code {
+    background: transparent;
+    color: #d4d4d4;
+    padding: 0;
+}
+
+/* Badges */
+.markdown-section img[alt*="badge"] {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+/* Tables */
+.markdown-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.markdown-section table thead {
+    background: var(--primary-color);
+    color: white;
+}
+
+.markdown-section table th,
+.markdown-section table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.markdown-section table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.markdown-section table tr:hover {
+    background: #f5f5f5;
+}
+
+/* Blockquotes */
+.markdown-section blockquote {
+    border-left: 4px solid var(--primary-color);
+    background: #f8f9fa;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.markdown-section blockquote p {
+    margin: 0;
+    color: #555;
+}
+
+/* Alert boxes */
+.markdown-section .alert {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.markdown-section .alert-info {
+    background: #e3f2fd;
+    border-left-color: #2196f3;
+    color: #0d47a1;
+}
+
+.markdown-section .alert-success {
+    background: #e8f5e9;
+    border-left-color: var(--success-color);
+    color: #1b5e20;
+}
+
+.markdown-section .alert-warning {
+    background: #fff3e0;
+    border-left-color: var(--warning-color);
+    color: #e65100;
+}
+
+.markdown-section .alert-danger {
+    background: #ffebee;
+    border-left-color: var(--danger-color);
+    color: #b71c1c;
+}
+
+/* Links */
+.markdown-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.markdown-section a:hover {
+    color: var(--secondary-color);
+    border-bottom-color: var(--secondary-color);
+}
+
+/* Navigation */
+.book-header {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.book-header .btn {
+    color: #666;
+}
+
+.book-header .btn:hover {
+    color: var(--primary-color);
+}
+
+/* Search */
+#book-search-input input {
+    border: 2px solid #eee;
+    border-radius: 25px;
+    padding: 8px 20px;
+    transition: all 0.2s;
+}
+
+#book-search-input input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Footer */
+.book-footer {
+    padding: 40px;
+    background: #fafafa;
+    border-top: 1px solid #eee;
+    margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .markdown-section {
+        padding: 20px;
+    }
+    
+    .markdown-section h1 {
+        font-size: 2em;
+    }
+    
+    .markdown-section h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Custom components */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-card {
+    padding: 20px;
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+
+.feature-card h3 {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+/* Version badge */
+.version-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--success-color);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+/* Code copy button */
+.copy-code-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+}
+
+.copy-code-button:hover {
+    background: var(--secondary-color);
+}
+
+/* Syntax highlighting enhancements */
+.hljs-keyword { color: #569cd6; }
+.hljs-string { color: #ce9178; }
+.hljs-comment { color: #6a9955; font-style: italic; }
+.hljs-function { color: #dcdcaa; }
+.hljs-class { color: #4ec9b0; }
+.hljs-number { color: #b5cea8; }
+.hljs-variable { color: #9cdcfe; }

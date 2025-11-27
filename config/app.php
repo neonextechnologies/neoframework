@@ -6,5 +6,13 @@ return [
     'debug' => env('APP_DEBUG', false),
     'url' => env('APP_URL', 'http://localhost'),
     'timezone' => 'Asia/Bangkok',
-    'locale' => 'th',
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Application Locale Configuration
+    |--------------------------------------------------------------------------
+    */
+    'locale' => env('APP_LOCALE', 'en'),
+    'fallback_locale' => 'en',
+    'lang_path' => base_path('resources/lang'),
 ];
