@@ -125,8 +125,13 @@ if (!function_exists('url')) {
 }
 
 if (!function_exists('auth')) {
-    function auth()
+    function auth(?string $guard = null)
     {
+        if (class_exists(\NeoPhp\Auth\AuthManager::class)) {
+            $manager = app(\NeoPhp\Auth\AuthManager::class);
+            return $guard ? $manager->guard($guard) : $manager;
+        }
+
         return app(\NeoPhp\Auth\Auth::class);
     }
 }
@@ -311,5 +316,28 @@ if (!function_exists('class_basename')) {
         $class = is_object($class) ? get_class($class) : $class;
 
         return basename(str_replace('\\', '/', $class));
+    }
+}
+
+if (!function_exists('gate')) {
+    function gate()
+    {
+        return \NeoPhp\Auth\Access\Gate::class;
+    }
+}
+
+if (!function_exists('can')) {
+    function can(string $ability, mixed $arguments = []): bool
+    {
+        $user = auth()->user();
+        \NeoPhp\Auth\Access\Gate::setUser($user);
+        return \NeoPhp\Auth\Access\Gate::allows($ability, $arguments);
+    }
+}
+
+if (!function_exists('cannot')) {
+    function cannot(string $ability, mixed $arguments = []): bool
+    {
+        return !can($ability, $arguments);
     }
 }
